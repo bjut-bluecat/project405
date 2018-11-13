@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.test.dao.WorkingOutputDao">
+    
+	<sql id="workingOutputColumns">
+		a.id AS "id",
+		a.type AS "type",
+		a.input AS "input",
+		a.unit AS "unit",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="workingOutputJoins">
+	</sql>
+    
+	<select id="get" resultType="WorkingOutput">
+		SELECT 
+			<include refid="workingOutputColumns"/>
+		FROM working_output a
+		<include refid="workingOutputJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="WorkingOutput">
+		SELECT 
+			<include refid="workingOutputColumns"/>
+		FROM working_output a
+		<include refid="workingOutputJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="WorkingOutput">
+		SELECT 
+			<include refid="workingOutputColumns"/>
+		FROM working_output a
+		<include refid="workingOutputJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO working_output(
+			id,
+			type,
+			input,
+			unit,
+			remark
+		) VALUES (
+			#{id},
+			#{type},
+			#{input},
+			#{unit},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE working_output SET 	
+			type = #{type},
+			input = #{input},
+			unit = #{unit},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM working_output
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

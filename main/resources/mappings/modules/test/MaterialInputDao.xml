@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.test.dao.MaterialInputDao">
+    
+	<sql id="materialInputColumns">
+		a.electric AS "electric",
+		a.steam AS "steam",
+		a.caco3 AS "caco3",
+		a.water AS "water",
+		a.o2 AS "o2",
+		a.festone AS "festone",
+		a.na2sio3 AS "na2sio3"
+	</sql>
+	
+	<sql id="materialInputJoins">
+	</sql>
+    
+	<select id="get" resultType="MaterialInput">
+		SELECT 
+			<include refid="materialInputColumns"/>
+		FROM material_input a
+		<include refid="materialInputJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="MaterialInput">
+		SELECT 
+			<include refid="materialInputColumns"/>
+		FROM material_input a
+		<include refid="materialInputJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="MaterialInput">
+		SELECT 
+			<include refid="materialInputColumns"/>
+		FROM material_input a
+		<include refid="materialInputJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO material_input(
+			electric,
+			steam,
+			caco3,
+			water,
+			o2,
+			festone,
+			na2sio3
+		) VALUES (
+			#{electric},
+			#{steam},
+			#{caco3},
+			#{water},
+			#{o2},
+			#{festone},
+			#{na2sio3}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE material_input SET 	
+			electric = #{electric},
+			steam = #{steam},
+			caco3 = #{caco3},
+			water = #{water},
+			o2 = #{o2},
+			festone = #{festone},
+			na2sio3 = #{na2sio3}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM material_input
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
